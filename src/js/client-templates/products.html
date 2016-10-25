@@ -1,0 +1,8 @@
+{% from "./macros.html" import product %}
+
+<div class="products">
+  {% for p in products %}
+    {{product(p.name, p.price)}}
+  {% endfor %}
+</div>
+

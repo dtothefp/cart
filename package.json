@@ -1,0 +1,42 @@
+{
+  "name": "code-challenge-frontend-api",
+  "version": "2.0.1",
+  "description": "Casper's code challenge for applicants",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server --watch -S ./data data/db.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CasperSleep/code-challenge-frontend-api.git"
+  },
+  "author": "Casper Dev Team",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/CasperSleep/code-challenge-frontend-api/issues"
+  },
+  "homepage": "https://github.com/CasperSleep/code-challenge-frontend-api#readme",
+  "devDependencies": {
+    "babel-polyfill": "6.16.0",
+    "babel-register": "6.18.0",
+    "boiler-addon-assemble-middleware": "^5.0.0",
+    "boiler-addon-assemble-nunjucks": "^5.0.0",
+    "boiler-addon-webpack-babel": "^5.0.0",
+    "boiler-addon-webpack-karma": "^5.0.0",
+    "boiler-addon-webpack-loaders-base": "^5.0.0",
+    "boiler-addon-webpack-styles": "^5.0.0",
+    "boiler-config-babelrc": "5.2.2",
+    "boiler-core": "^5.0.0",
+    "boiler-preset-plus": "^5.0.0",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "json-server": "0.8.22",
+    "webpack": "2.1.0-beta.25"
+  },
+  "dependencies": {
+    "nunjucks-loader": "2.4.4",
+    "redux": "3.6.0",
+    "redux-logger": "2.7.0",
+    "redux-thunk": "2.1.0"
+  }
+}

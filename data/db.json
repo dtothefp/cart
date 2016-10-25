@@ -1,0 +1,27 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Magical Night-lite",
+      "description": "This one of a kind magical night-lite will not only illuminates your room, but gives you magical dreams that you'll remember forever.",
+      "price": "$1000"
+    },
+    {
+      "id": 2,
+      "name": "Never ending glass of Water",
+      "description": "Tired of running out of water when you sleep? This glass of water is always half-full. And it always stays clean and germ free!",
+      "price": "$2000"
+    },
+    {
+      "id": 3,
+      "name": "Always rested Alarm Clocky",
+      "description": "Clocky knows when to wake you for optimal sleep. Clockly will never let you miss a meeting. Gone are the morning of fighting the snooze button. With Clocky you'll never wake up on the wrong side of the bed.",
+      "price": "$1500"
+    }
+  ],
+  "cart_order": [
+    {
+      "id": 1
+    }
+  ]
+}

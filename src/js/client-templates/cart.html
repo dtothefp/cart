@@ -1,0 +1,28 @@
+{% from "./macros.html" import cart_item %}
+
+<div class="cart">
+  <div class="cart__header">
+    <div class="cart__header-count">
+      <span>{{items.length}} items in your cart</span>
+      <span></span>
+    </div>
+    <div class="cart__header-shipping">
+      <span>Shipping</span>
+      <span>{{shipping or "Free"}}</span>
+    </div>
+    <div class="cart__header-total">
+      <span>Total</span>
+      <span>&#36;{{total or 0}}</span>
+    </div>
+  </div>
+  <div class="cart__items">
+    {% for item in items %}
+      {{cart_item(item.name, item.price)}}
+    {% endfor %}
+  </div>
+  <div class="cart__feature">
+    <img src="" alt="">
+    <p>Consectetur aliquid assumenda ducimus doloremque tempore quia consequuntur nesciunt maiores. Voluptate quod earum corporis doloribus adipisci quibusdam consequuntur maxime sed voluptatem, sint doloremque, perferendis earum, non officiis ratione adipisci ratione!</p>
+    <button>Pre-Order for &#36;200</button>
+  </div>
+</div>
