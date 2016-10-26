@@ -1,14 +1,42 @@
-/* eslint no-unreachable:0 */
+/* eslint no-fallthrough:0 */
+import merge from 'lodash/merge';
+import omit from 'lodash/omit';
 
 export default function(state = {}, action) {
+  const {id} = action;
+  const currState = state[id];
+  let nextState, quantity;
 
   switch (action.type) {
     case 'INIT_CART':
-      return Object.assign({}, state, {
-        items: action.value
-      });
+      nextState = action.value.reduce((acc, {id, quantity = 1}) => ({
+        ...acc,
+        [id]: {quantity}
+      }), Object.assign({}, state));
+      break;
+    case 'ADD_CART':
+      if (currState) {
+        quantity = currState.quantity ? currState.quantity + 1 : 1;
+      } else {
+        quantity = 1;
+      }
+      break;
+    case 'INCREMENT_CART':
+      quantity = currState.quantity + 1;
+      break;
+    case 'DECREMENT_CART':
+      quantity = currState.quantity - 1;
       break;
   }
 
-  return state;
+
+  if (quantity) {
+    nextState = merge({}, state, {
+      [id]: {quantity}
+    });
+  } else if (id) {
+    nextState = omit(state, id);
+  }
+
+  return nextState || state;
 }

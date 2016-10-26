@@ -43,7 +43,6 @@ export default {
       const ogExclude = babelLoader.exclude;
       const exclude = fp => {
         if (fp.indexOf('nunjucks-config') > 0) {
-          console.log(fp);
           return false;
         }
 

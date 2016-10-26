@@ -1,17 +1,8 @@
-function getItem(id) {
-  return fetch(`http://localhost:3000/products/${id}`)
-    .then(data => data.json());
-}
-
 export function init() {
   return dispatch => {
     return fetch('http://localhost:3000/cart_order')
       .then(data => data.json())
       .then(data => {
-        return Promise.all(
-          data.map(({id}) => getItem(id))
-        );
-      }).then(data => {
         dispatch({
           type: 'INIT_CART',
           value: data
@@ -19,5 +10,27 @@ export function init() {
 
         return data;
       });
+  };
+}
+
+export function update(id, opts = {}) {
+  const {method = 'add'} = opts;
+  let type;
+
+  switch (method) {
+    case 'add':
+      type = 'ADD_CART';
+      break;
+    case 'increment':
+      type = 'INCREMENT_CART';
+      break;
+    case 'decrement':
+      type = 'DECREMENT_CART';
+      break;
+  }
+
+  return {
+    type,
+    id
   };
 }

@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint newline-per-chained-call:0 */
 import {
   applyMiddleware,
   bindActionCreators,
@@ -10,10 +10,9 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import {store as cart, actions as cartActions} from './modules/cart';
 import {store as products, actions as productActions} from './modules/products';
-import cartTemp from './client-templates/cart.html';
-import productsTemp from './client-templates/products.html';
+import Products from './components/Products';
+import Cart from './components/Cart';
 
-const toNumber = num => Number(num.replace(/[^0-9\.]+/g, ''));
 const {NODE_ENV} = process.env;
 const isDev = NODE_ENV === 'development';
 const middleware = [thunk];
@@ -31,39 +30,17 @@ const actions = {
   productActions: bindActionCreators(productActions, store.dispatch)
 };
 
+const productsComponent = new Products(store, actions); // eslint-disable-line
+const cartComponent = new Cart(store, actions);
+const app = document.querySelector('[data-app]');
+
 Promise.all([
-  actions.productActions.init(),
-  actions.cartActions.init()
-]).then(([products, items]) => {
-  const renderedCartTemp = cartTemp.render({
-    items,
-    shipping: 'shipping',
-    total: items.reduce((acc, {price}) => acc + toNumber(price), 0)
-  });
-  const renderedProductsTemp = productsTemp.render({
-    products
-  });
-  const productWrapper = document.createElement('div');
-  const cartWrapper = document.createElement('div');
+  actions.cartActions.init(),
+  actions.productActions.init()
+]).then(() => {
+  const productElm = productsComponent.render();
+  const cartElm = cartComponent.render();
 
-  productWrapper.innerHTML = renderedProductsTemp;
-  cartWrapper.innerHTML = renderedCartTemp;
-
-  document.body.appendChild(productWrapper);
-  document.body.appendChild(cartWrapper);
+  app.appendChild(productElm);
+  app.appendChild(cartElm);
 });
-
-// TODO: get carts items from API request for ID
-
-
-// fetch('http://localhost:3000/cart_order', {
-  // method: 'post',
-  // headers: {
-    // 'Accept': 'application/json',
-    // 'Content-Type': 'application/json'
-  // },
-  // body: JSON.stringify({
-    // email: 'bleep',
-    // answer: 'bloop'
-  // })
-// });
