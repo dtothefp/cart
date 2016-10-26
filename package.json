@@ -34,6 +34,8 @@
     "webpack": "2.1.0-beta.25"
   },
   "dependencies": {
+    "dom4": "1.8.3",
+    "lodash": "4.16.4",
     "nunjucks-loader": "2.4.4",
     "redux": "3.6.0",
     "redux-logger": "2.7.0",

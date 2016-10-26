@@ -4,9 +4,10 @@ export default function(state = {}, action) {
 
   switch (action.type) {
     case 'INIT_PRODUCTS':
-      return Object.assign({}, state, {
-        products: action.value
-      });
+      return action.value.reduce((acc, {id, ...rest}) => ({
+        ...acc,
+        [id]: rest
+      }), Object.assign({}, state));
       break;
   }
 
