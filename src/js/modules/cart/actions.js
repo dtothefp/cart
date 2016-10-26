@@ -21,6 +21,9 @@ export function update(id, opts = {}) {
     case 'add':
       type = 'ADD_CART';
       break;
+    case 'remove':
+      type = 'REMOVE_CART';
+      break;
     case 'increment':
       type = 'INCREMENT_CART';
       break;

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "json-server --watch -S ./data data/db.json",
+    "fix": "eslint --fix ./test/integration/**",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -29,8 +30,13 @@
     "boiler-config-babelrc": "5.2.2",
     "boiler-core": "^5.0.0",
     "boiler-preset-plus": "^5.0.0",
+    "chai": "3.5.0",
+    "chai-dom": "1.4.2",
+    "fetch-mock": "5.5.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "json-server": "0.8.22",
+    "simulate-event": "1.4.0",
+    "trigger-event": "1.0.3",
     "webpack": "2.1.0-beta.25"
   },
   "dependencies": {

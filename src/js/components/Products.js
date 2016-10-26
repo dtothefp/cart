@@ -1,6 +1,5 @@
 import Product from './Product';
 import template from '../client-templates/products.html';
-/* eslint no-debugger:0 */
 
 export default class Products {
   constructor(store, actions) {
@@ -9,6 +8,7 @@ export default class Products {
     this.actions = actions;
     this.elm = document.createElement('div');
     this.elm.classList.add('products');
+    this.children = {};
     this.subscribe();
   }
 
@@ -17,29 +17,48 @@ export default class Products {
     this.elm.innerHTML = html;
 
     const frag = this.addProducts(this.state.products);
-
     this.elm.appendChild(frag);
-    this.subscribe();
 
     return this.elm;
   }
 
-  addProducts(products) {
+  addProducts(products = []) {
     return Object.keys(products).reduce((frag, id) => {
-      const {elm} = new Product(this.actions, {
+      const child = new Product(this.actions, {
         id,
-        state: products[id]
+        state: {
+          ...products[id],
+          added: !!this.state.cart[id]
+        }
       });
 
-      frag.appendChild(elm);
+      frag.appendChild(child.elm);
+      this.children[id] = child;
 
       return frag;
     }, document.createDocumentFragment());
   }
 
+  subscriber() {
+    const state = this.store.getState();
+    const childKeys = Object.keys(this.children);
+
+    if (childKeys.length) {
+      const keys = Object.keys(state.products);
+
+      keys.forEach(id => {
+        const currState = state.cart[id];
+        const child = this.children[id];
+
+        child.update(!!currState);
+      });
+    }
+
+    this.lastState = this.state;
+    this.state = state;
+  }
+
   subscribe() {
-    this.store.subscribe(state => {
-      this.state = this.store.getState();
-    });
+    this.store.subscribe(() => this.subscriber());
   }
 }

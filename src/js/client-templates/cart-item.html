@@ -1,6 +1,6 @@
 <img src="" alt="">
 <h6>{{name}}</h6>
 <button data-js-quantity="increment">+</button>
-<span>{{quantity}}</span>
+<span data-js-update="quantity">{{quantity}}</span>
 <button data-js-quantity="decrement">-</button>
-<span>&#36;{{price | currency}}</span>
+<span>&#36;<span data-js-update="price">{{price or basePrice}}</span></span>
