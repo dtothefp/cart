@@ -60,7 +60,7 @@ describe('#Products', () => {
     const quantity = items.querySelector('[data-js-update="quantity"]');
 
     trigger(increment, 'click', {
-      bubbles: true
+      'bubbles': true
     });
 
     expect(quantity).to.have.text('2');

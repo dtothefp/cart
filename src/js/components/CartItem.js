@@ -19,7 +19,13 @@ export default class CartItem {
   }
 
   addListeners() {
-    this.elm.addEventListener('click', this.handleClick.bind(this));
+    // TODO: was previously binding the listener to the `this.elm` and delegating
+    // but was having problems with Karma testing triggering events in Safari ¯\_(ツ)_/¯
+    const quantityElms = [...this.elm.querySelectorAll('[data-js-quantity]')];
+
+    quantityElms.forEach(elm => {
+      elm.addEventListener('click', this.handleClick.bind(this));
+    });
   }
 
   addObservers() {

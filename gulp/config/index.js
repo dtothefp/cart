@@ -16,7 +16,9 @@ export default {
     includePaths: [],
     integrity: 'sha256',
     expose: {},
-    alias: {},
+    alias: {
+      redux: 'redux/lib/index.js' // jsnext:main breaks karma ¯\_(ツ)_/¯
+    },
     externals: [
       {
         name: {

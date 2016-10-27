@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import sinon from 'sinon';
+import trigger from 'trigger-event';
 import Product from '../../../src/js/components/Product';
 
 describe('#Product', () => {
@@ -18,7 +19,6 @@ describe('#Product', () => {
     added: false
   };
   const comp = new Product(actions, {id, state});
-  const event = new Event('click');
   const $elm = comp.elm;
 
   it('should create a product element', () => {
@@ -37,7 +37,7 @@ describe('#Product', () => {
   });
 
   it('should add a product', () => {
-    comp.observers.add.dispatchEvent(event);
+    trigger(comp.observers.add, 'click');
 
     expect(spy.calledOnce).to.be.true;
     expect(spy.getCall(0).args[0]).to.equal(id);
@@ -48,7 +48,7 @@ describe('#Product', () => {
   });
 
   it('should remove a product', () => {
-    comp.observers.add.dispatchEvent(event);
+    trigger(comp.observers.add, 'click');
 
     expect(spy.calledTwice).to.be.true;
     expect(spy.getCall(1).args).to.eql(
