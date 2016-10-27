@@ -1,6 +1,6 @@
 <div class="cart__header">
   <div class="cart__header-count">
-    <span>{{items.length}} items in your cart</span>
+    <span data-js-cart="count">{{count}} items in your cart</span>
     <span></span>
   </div>
   <div class="cart__header-shipping">
@@ -9,7 +9,7 @@
   </div>
   <div class="cart__header-total">
     <span>Total</span>
-    <span>&#36;{{total or 0}}</span>
+    <span data-js-cart="total">&#36;{{total or 0}}</span>
   </div>
 </div>
 <div class="cart__items">{# Append Cart Item Here#}</div>

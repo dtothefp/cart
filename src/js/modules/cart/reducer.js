@@ -21,6 +21,9 @@ export default function(state = {}, action) {
         quantity = 1;
       }
       break;
+    case 'REMOVE_CART':
+      quantity = 0;
+      break;
     case 'INCREMENT_CART':
       quantity = currState.quantity + 1;
       break;

@@ -1,22 +1,23 @@
 {
-  "name": "code-challenge-frontend-api",
-  "version": "2.0.1",
-  "description": "Casper's code challenge for applicants",
+  "name": "redux-nunjucks-sample",
+  "version": "0.1.0",
+  "description": "Nunjucs Redux shopping care example",
   "main": "index.js",
   "scripts": {
-    "start": "json-server --watch -S ./data data/db.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gulp build",
+    "fix": "eslint --fix ./test/integration/**",
+    "test": "gulp karma"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CasperSleep/code-challenge-frontend-api.git"
+    "url": "git+https://github.com/dtothefp/cart.git"
   },
   "author": "Casper Dev Team",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/CasperSleep/code-challenge-frontend-api/issues"
+    "url": "https://github.com/dtothefp/cart/issues"
   },
-  "homepage": "https://github.com/CasperSleep/code-challenge-frontend-api#readme",
+  "homepage": "https://github.com/dtothefp/cart/#readme",
   "devDependencies": {
     "babel-polyfill": "6.16.0",
     "babel-register": "6.18.0",
@@ -29,8 +30,12 @@
     "boiler-config-babelrc": "5.2.2",
     "boiler-core": "^5.0.0",
     "boiler-preset-plus": "^5.0.0",
+    "chai": "3.5.0",
+    "chai-dom": "1.4.2",
+    "fetch-mock": "5.5.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "json-server": "0.8.22",
+    "trigger-event": "1.0.3",
     "webpack": "2.1.0-beta.25"
   },
   "dependencies": {
