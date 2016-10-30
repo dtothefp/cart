@@ -42,7 +42,7 @@ describe('#Products', () => {
     const [button] = [...$elm.querySelectorAll('[data-js-update]')];
 
     trigger(button, 'click');
-    expect(button).to.have.text('Added');
+    expect(button).to.have.text('Remove');
   });
 
   it('should remove a product', () => {

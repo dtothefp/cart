@@ -141,6 +141,12 @@ export default class Cart {
 
       if (count !== prevCount) {
         this.observers.count.textContent = count;
+
+        if (count === 0 && prevCount > 0) {
+          this.observers.empty.classList.remove('is-hidden');
+        } else if (count > 0 && prevCount === 0) {
+          this.observers.empty.classList.add('is-hidden');
+        }
       }
     }
 

@@ -1,3 +1,5 @@
+@import 'normalize';
+
 $black: #000;
 $white: #fff;
 $red: #ec5446;
@@ -65,4 +67,10 @@ $font-family-sans: 'SharpUnity', $font-family-sans-fallback !default;
   background-color: $light-blue;
   color: $white;
   padding: 0 20px;
+}
+
+@include normalize();
+
+.is-hidden {
+  display: none;
 }

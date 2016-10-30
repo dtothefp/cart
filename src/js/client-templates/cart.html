@@ -17,7 +17,10 @@
     <p>&#36;<span  data-js-update="total">{{total or 0}}</span></p>
   </div>
 </div>
-<div class="cart__items">{# Append Cart Items Here#}</div>
+<div class="cart__items">
+  <p class="cart__items-empty {% if count and count > 0 %}is-hidden{% endif %}" data-js-update="empty">YOUR CART IS EMPTY</p>
+  {# Append Cart Items Here#}
+</div>
 <div class="cart__feature">
   <p>For a more magical experience, add on</p>
   <div class="cart__feature-content">

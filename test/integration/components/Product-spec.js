@@ -29,7 +29,7 @@ describe('#Product', () => {
     const selector = '.products__product-content';
     const name = $elm.querySelector(`${selector} h4`);
     const description = $elm.querySelector(`${selector} p`);
-    const price = $elm.querySelector(`${selector} span`);
+    const price = $elm.querySelector('.products__product-cta span');
 
     expect(name).to.have.text(state.name);
     expect(description).to.have.text(state.description);

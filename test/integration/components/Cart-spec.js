@@ -30,7 +30,7 @@ describe('#Cart', () => {
     expect(header).to.have.class('cart__header');
     expect(items).to.have.class('cart__items');
     expect(feature).to.have.class('cart__feature');
-    expect(items.children.length).to.equal(0);
+    expect(items.querySelectorAll('.cart__items-item').length).to.equal(0);
   });
 
   it('should update it\'s state from the store', async () => {
@@ -47,7 +47,7 @@ describe('#Cart', () => {
     const quantity = items.querySelector('[data-js-update="quantity"]');
     const price = items.querySelector('[data-js-update="price"]');
 
-    expect(items.children.length).to.equal(1);
+    expect(items.querySelectorAll('.cart__items-item').length).to.equal(1);
     expect(name).to.have.text(product.name);
     expect(quantity).to.have.text('1');
     expect(price).to.have.text(`${currency(product.price)}`);
@@ -88,6 +88,6 @@ describe('#Cart', () => {
       bubbles: true
     });
 
-    expect(items.children.length).to.equal(0);
+    expect(items.querySelectorAll('.cart__items-item').length).to.equal(0);
   });
 });
