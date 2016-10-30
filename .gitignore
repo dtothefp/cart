@@ -4,4 +4,7 @@ dist
 *.log
 .eslintrc
 README.md
+TODO.md
 recap.md
+deploy_key*
+!deploy_key.enc
