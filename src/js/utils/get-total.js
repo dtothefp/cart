@@ -1,4 +1,3 @@
-import curr from './currency-to-number';
 /**
  * Total the products by their corresponding quantity
  * @param {Object} cart current state of cart
@@ -12,7 +11,7 @@ export default function({cart, products}, initial = 0) {
 
   return Object.keys(items).reduce((total, id) => {
     const {quantity} = items[id];
-    const price = curr(products[id].price);
+    const {price} = products[id];
 
     return total + (price * quantity);
   }, initial);

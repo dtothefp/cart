@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import fetchMock from 'fetch-mock';
 import trigger from 'trigger-event';
-import currency from '../../../src/js/utils/currency-to-number';
 import {products} from '../../../data/db';
 import flux from '../../../src/js/modules/bootstrap';
 import Cart from '../../../src/js/components/Cart';
+import curr from '../../../src/js/utils/currency-to-number';
 
 describe('#Cart', () => {
   const mockCart = [{id: '1'}];
@@ -50,7 +50,7 @@ describe('#Cart', () => {
     expect(items.querySelectorAll('.cart__items-item').length).to.equal(1);
     expect(name).to.have.text(product.name);
     expect(quantity).to.have.text('1');
-    expect(price).to.have.text(`${currency(product.price)}`);
+    expect(price).to.have.text(`${curr(product.price)}`);
   });
 
   it('should increment the quantity', () => {

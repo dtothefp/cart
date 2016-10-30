@@ -1,14 +1,12 @@
 import temp from '../client-templates/cart-item.html';
-import currencyToNumber from '../utils/currency-to-number';
 
 export default class CartItem {
   constructor(actions, {id, state}) {
-    this.basePrice = currencyToNumber(state.price);
     this.state = {
       ...state,
-      quantity: state.quantity || 1,
-      price: this.basePrice
+      quantity: state.quantity || 1
     };
+    this.basePrice = state.price;
     this.actions = actions;
     this.elm = document.createElement('div');
     this.elm.classList.add('cart__items-item');

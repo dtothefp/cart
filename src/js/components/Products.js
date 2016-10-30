@@ -34,7 +34,7 @@ export default class Products {
     this.actions.cartActions.toggleCart({open: true});
   }
 
-  addProducts(products = []) {
+  addProducts(products = {}) {
     return Object.keys(products).reduce((frag, id) => {
       const child = new Product(this.actions, {
         id,

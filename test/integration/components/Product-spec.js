@@ -15,7 +15,7 @@ describe('#Product', () => {
   const state = {
     name: 'bleep',
     description: 'bloop',
-    price: '$100',
+    price: 100,
     added: false
   };
   const comp = new Product(actions, {id, state});
@@ -33,7 +33,7 @@ describe('#Product', () => {
 
     expect(name).to.have.text(state.name);
     expect(description).to.have.text(state.description);
-    expect(price).to.have.text(state.price);
+    expect(price).to.have.text(`${state.price}`);
   });
 
   it('should add a product', () => {

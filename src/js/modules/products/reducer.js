@@ -1,15 +1,21 @@
-/* eslint no-unreachable:0 */
+import curr from '../../utils/currency-to-number';
 
 export default function(state = {}, action) {
+  const {value} = action;
+  let newState;
 
   switch (action.type) {
     case 'INIT_PRODUCTS':
-      return action.value.reduce((acc, {id, ...rest}) => ({
-        ...acc,
-        [id]: rest
-      }), Object.assign({}, state));
+      newState = value.reduce((acc, {id, price, ...rest}) => {
+        const product = Object.assign(rest, {
+          price: curr(price)
+        });
+
+        acc[id] = product;
+        return acc;
+      }, {});
       break;
   }
 
-  return state;
+  return Object.assign({}, state, newState);
 }

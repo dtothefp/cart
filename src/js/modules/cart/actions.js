@@ -1,5 +1,4 @@
 import getTotal from '../../utils/get-total';
-import curr from '../../utils/currency-to-number';
 
 export function init() {
   return dispatch => {
@@ -30,7 +29,7 @@ export function update(id, opts = {}) {
     const {method = 'add'} = opts;
     const state = getState();
     const {products, cart} = state;
-    const price = curr(products[id].price);
+    const {price} = products[id];
     const {quantity} = cart.items && cart.items[id] || {};
     let type, subTotal;
 

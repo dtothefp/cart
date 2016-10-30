@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import fetchMock from 'fetch-mock';
 import {products} from '../../../data/db';
 import flux from '../../../src/js/modules/bootstrap';
+import curr from '../../../src/js/utils/currency-to-number';
 
 fetchMock.get('http://localhost:3000/products', products);
 
@@ -12,9 +13,9 @@ describe('products-flux-module', () => {
   it('should initialize product items from the api', async () => {
     await actions.productActions.init();
 
-    const productHash = products.reduce((acc, {id, ...rest}) => ({
+    const productHash = products.reduce((acc, {id, price, ...rest}) => ({
       ...acc,
-      [id]: rest
+      [id]: Object.assign(rest, {price: curr(price)})
     }), {});
     const state = getState();
 

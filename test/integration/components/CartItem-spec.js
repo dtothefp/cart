@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import sinon from 'sinon';
 import trigger from 'trigger-event';
 import CartItem from '../../../src/js/components/CartItem';
-import currency from '../../../src/js/utils/currency-to-number';
 
 describe('#CartItem', () => {
   const id = 1;
@@ -14,7 +13,7 @@ describe('#CartItem', () => {
     cartActions
   };
   const state = {
-    price: '$100'
+    price: 100
   };
   const comp = new CartItem(actions, {id, state});
   const $elm = comp.elm;
@@ -29,7 +28,7 @@ describe('#CartItem', () => {
     const price = $elm.querySelector(`[data-js-update="price"]`);
 
     expect(quantity).to.have.text('1');
-    expect(price).to.have.text(`${currency(state.price)}`);
+    expect(price).to.have.text(`${state.price}`);
   });
 
   it('should add a cart item', () => {

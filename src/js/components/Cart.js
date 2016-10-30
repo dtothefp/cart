@@ -3,7 +3,6 @@ import isArray from 'lodash/isArray';
 import isNumber from 'lodash/isNumber';
 import CartItem from './CartItem';
 import template from '../client-templates/cart.html';
-import currencyToNumber from '../utils/currency-to-number';
 
 export default class Cart {
   constructor(store, actions) {
@@ -46,7 +45,9 @@ export default class Cart {
 
   getTotal(items) {
     return Object.keys(items).reduce((num, id) => {
-      return num + currencyToNumber(this.state.products[id].price);
+      const {price} = this.state.products[id];
+
+      return num + price;
     }, 0);
   }
 
