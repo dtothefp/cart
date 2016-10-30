@@ -57,3 +57,12 @@ $font-family-sans: 'SharpUnity', $font-family-sans-fallback !default;
     outline:0;
   }
 }
+
+@mixin header {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  background-color: $light-blue;
+  color: $white;
+  padding: 0 20px;
+}

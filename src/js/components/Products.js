@@ -19,7 +19,19 @@ export default class Products {
     const frag = this.addProducts(this.state.products);
     this.elm.appendChild(frag);
 
+    this.addListeners();
+
     return this.elm;
+  }
+
+  addListeners() {
+    const cart = this.elm.querySelector('[data-js-listen]');
+
+    cart.addEventListener('click', this.handleClick.bind(this));
+  }
+
+  handleClick(e) {
+    this.actions.cartActions.toggleCart({open: true});
   }
 
   addProducts(products = []) {

@@ -1,12 +1,16 @@
 .products {
-  background-color: $dark-bg;
+  flex-grow: 1;
 
   &__header {
-    background: $light-blue;
-    padding: 20px 0;
-    h2 {
+    @include header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .svg {
+      width: 30px;
       color: $white;
-      margin: 0 20px;
+      cursor: pointer;
     }
   }
 
@@ -72,8 +76,119 @@
   }
 }
 .cart {
-  &__items-item {
+  background: $white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  transform: translateX(100%);
 
+  @media (min-width: map-get($breakpoints, medium)) {
+    max-width: 40%;
+  }
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  &__header-main,
+  &__header-shipping,
+  &__header-total {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    p:first-of-type {
+      font-weight: 600;
+    }
+  }
+
+  &__header-shipping,
+  &__header-total {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    p:first-of-type {
+      margin: 0 0 0 20px;
+    }
+
+    p:last-child {
+      margin: 0 20px 0 0;
+    }
+  }
+
+  &__header-main {
+    @include header;
+  }
+
+
+  &__header-count {
+    display: flex;
+    align-items: center;
+
+    .svg {
+      cursor: pointer;
+      width: 20px;
+      margin-right: 10px;
+    }
+  }
+
+  &__header-shipping,
+  &__header-total {
+    padding: 10px 0;
+  }
+
+  &__items,
+  &__feature {
+    margin: 20px;
+  }
+
+  &__items {
+    border-top: 2px solid $light-gray;
+    border-bottom: 2px solid $light-gray;
+  }
+
+  &__items-item,
+  &__items-interact,
+  &__items-wrapper {
+    display: flex;
+  }
+
+  &__items-meta {
+    margin-left: 10px;
+
+    h6 {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+  }
+
+  &__items-interact {
+    div {
+      margin: 0 5px;
+    }
+  }
+
+  &__items-item {
+    justify-content: space-between;
+    margin: 20px 0;
+  }
+
+  &__items-wrapper {
+    img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  &__feature-content {
+    width: 70%;
+    margin: 20px auto;
+
+    img {
+      width: 100%;
+    }
   }
 
   &__items-button {

@@ -5,7 +5,6 @@ export default class Src {
     this.sites = {
       fill: 'http://www.fillmurray.com',
       cage: 'https://www.placecage.com'
-
     };
   }
 
@@ -22,12 +21,19 @@ export default class Src {
     return new nodes.CallExtension(this, 'run', args);
   }
 
+  join(...args) {
+    return args.join('/');
+  }
+
   run(context, args) {
     const sites = this.sites;
     const i = this.i;
     const type = args.type || Object.keys(sites)[i % 2];
+    const {orientation} = args;
+    const first = (orientation === 'landscape' ? '50' : '30') + i;
+    const second = (orientation === 'portrait' ? '50' : '30') + i;
 
     this.i++;
-    return `${sites[type]}/30${i}/30${i}`;
+    return this.join(sites[type], first, second);
   }
 }

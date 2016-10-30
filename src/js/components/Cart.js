@@ -31,14 +31,33 @@ export default class Cart {
     this.itemsElm.appendChild(frag);
 
     this.addObservers();
+    this.addListeners();
+
+    if (this.isOpen()) {
+      this.elm.classList.add('open');
+    }
 
     return this.elm;
+  }
+
+  isOpen(state = this.state) {
+    return state.cart && state.cart.open;
   }
 
   getTotal(items) {
     return Object.keys(items).reduce((num, id) => {
       return num + currencyToNumber(this.state.products[id].price);
     }, 0);
+  }
+
+  addListeners() {
+    const close = this.elm.querySelector('[data-js-listen]');
+
+    close.addEventListener('click', this.handleClick.bind(this));
+  }
+
+  handleClick(e) {
+    this.actions.cartActions.toggleCart({open: false});
   }
 
   addObservers() {
@@ -133,6 +152,15 @@ export default class Cart {
 
     this.lastState = this.state;
     this.state = state;
+
+    const lastWasOpen = this.isOpen(this.lastState);
+    const currIsOpen = this.isOpen();
+
+    if (currIsOpen && !lastWasOpen) {
+      this.elm.classList.add('open');
+    } else if (!currIsOpen && lastWasOpen) {
+      this.elm.classList.remove('open');
+    }
   }
 
   subscribe() {

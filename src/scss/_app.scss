@@ -17,3 +17,9 @@ img {
 button {
   @include button-variant;
 }
+
+.app {
+  display: flex;
+  position: relative;
+  background-color: $dark-bg;
+}
