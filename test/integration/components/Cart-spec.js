@@ -6,7 +6,7 @@ import {products} from '../../../data/db';
 import flux from '../../../src/js/modules/bootstrap';
 import Cart from '../../../src/js/components/Cart';
 
-describe('#Products', () => {
+describe('#Cart', () => {
   const mockCart = [{id: '1'}];
 
   fetchMock.get('http://localhost:3000/cart_order', mockCart);

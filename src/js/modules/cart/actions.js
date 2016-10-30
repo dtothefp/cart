@@ -1,3 +1,6 @@
+import getTotal from '../../utils/get-total';
+import curr from '../../utils/currency-to-number';
+
 export function init() {
   return dispatch => {
     return fetch('http://localhost:3000/cart_order')
@@ -13,27 +16,47 @@ export function init() {
   };
 }
 
-export function update(id, opts = {}) {
-  const {method = 'add'} = opts;
-  let type;
-
-  switch (method) {
-    case 'add':
-      type = 'ADD_CART';
-      break;
-    case 'remove':
-      type = 'REMOVE_CART';
-      break;
-    case 'increment':
-      type = 'INCREMENT_CART';
-      break;
-    case 'decrement':
-      type = 'DECREMENT_CART';
-      break;
-  }
+export function toggleCart(opts = {}) {
+  const {open} = opts;
 
   return {
-    type,
-    id
+    type: 'TOGGLE_CART',
+    open
+  };
+}
+
+export function update(id, opts = {}) {
+  return (dispatch, getState) => {
+    const {method = 'add'} = opts;
+    const state = getState();
+    const {products, cart} = state;
+    const price = curr(products[id].price);
+    const {quantity} = cart.items && cart.items[id] || {};
+    let type, subTotal;
+
+    switch (method) {
+      case 'add':
+        type = 'ADD_CART';
+        subTotal = price;
+        break;
+      case 'remove':
+        type = 'REMOVE_CART';
+        subTotal = -(price * quantity);
+        break;
+      case 'increment':
+        type = 'INCREMENT_CART';
+        subTotal = price;
+        break;
+      case 'decrement':
+        type = 'DECREMENT_CART';
+        subTotal = -price;
+        break;
+    }
+
+    dispatch({
+      type,
+      id,
+      total: getTotal(state, subTotal)
+    });
   };
 }

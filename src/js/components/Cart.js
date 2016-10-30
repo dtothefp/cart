@@ -1,4 +1,6 @@
 import union from 'lodash/union';
+import isArray from 'lodash/isArray';
+import isNumber from 'lodash/isNumber';
 import CartItem from './CartItem';
 import template from '../client-templates/cart.html';
 import currencyToNumber from '../utils/currency-to-number';
@@ -12,38 +14,45 @@ export default class Cart {
     this.elm.classList.add('cart');
     this.children = {};
     this.subscribe();
-    this.addObservers();
   }
 
   render() {
+    const {items = {}} = this.state.cart;
     const ctx = {
-      count: Object.keys(this.state.cart).length,
-      total: this.getTotal()
+      count: Object.keys(items).length,
+      total: this.getTotal(items)
     };
     const html = template.render(ctx);
     this.elm.innerHTML = html;
 
-    const frag = this.addItems(this.state.cart, this.state.products);
+    const frag = this.addItems(items, this.state.products);
 
     this.itemsElm = this.elm.querySelector('.cart__items');
     this.itemsElm.appendChild(frag);
 
+    this.addObservers();
+
     return this.elm;
   }
 
-  getTotal() {
-    return Object.keys(this.state.cart).reduce((num, id) => {
+  getTotal(items) {
+    return Object.keys(items).reduce((num, id) => {
       return num + currencyToNumber(this.state.products[id].price);
     }, 0);
   }
 
   addObservers() {
-    const elms = [...this.elm.querySelectorAll('[data-js-cart]')];
+    const elms = [...this.elm.querySelectorAll('[data-js-update]')];
 
     this.observers = elms.reduce((acc, elm) => {
       const {jsUpdate} = elm.dataset;
+      const val = acc[jsUpdate];
 
-      acc[jsUpdate] = elm;
+      if (val) {
+        acc[jsUpdate] = isArray(val) ? [...val, elm] : [val, elm];
+      } else {
+        acc[jsUpdate] = elm;
+      }
 
       return acc;
     }, {});
@@ -68,15 +77,19 @@ export default class Cart {
 
   subscriber() {
     const state = this.store.getState();
+    const {total} = state.cart || {};
+    const {total: prevTotal} = this.state.cart || {};
 
     if (this.itemsElm) {
+      const {items = {}, count} = state.cart;
+      const prevCount = this.state.cart.count;
       const childKeys = Object.keys(this.children);
-      const cartKeys = Object.keys(state.cart);
+      const cartKeys = Object.keys(items);
       const keys = union(childKeys, cartKeys);
       let frag;
 
       keys.forEach(id => {
-        const currState = state.cart[id];
+        const currState = items[id];
         let child = this.children[id];
 
         if (currState && child) {
@@ -102,9 +115,20 @@ export default class Cart {
         }
       });
 
+
       if (frag) {
         this.itemsElm.appendChild(frag);
       }
+
+      if (count !== prevCount) {
+        this.observers.count.textContent = count;
+      }
+    }
+
+    if (isNumber(total) && total !== prevTotal) {
+      this.observers.total.forEach(elm => {
+        elm.textContent = total;
+      });
     }
 
     this.lastState = this.state;

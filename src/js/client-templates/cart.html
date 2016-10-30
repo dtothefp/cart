@@ -1,7 +1,7 @@
 <div class="cart__header">
   <div class="cart__header-count">
-    <span data-js-cart="count">{{count}} items in your cart</span>
-    <span></span>
+    <span><span data-js-update="count">{{count}}</span> items in your cart</span>
+    <span>&#36;<span  data-js-update="total">{{total or 0}}</span></span>
   </div>
   <div class="cart__header-shipping">
     <span>Shipping</span>
@@ -9,10 +9,10 @@
   </div>
   <div class="cart__header-total">
     <span>Total</span>
-    <span data-js-cart="total">&#36;{{total or 0}}</span>
+    <span>&#36;<span  data-js-update="total">{{total or 0}}</span></span>
   </div>
 </div>
-<div class="cart__items">{# Append Cart Item Here#}</div>
+<div class="cart__items">{# Append Cart Items Here#}</div>
 <div class="cart__feature">
   <img src="" alt="">
   <p>Consectetur aliquid assumenda ducimus doloremque tempore quia consequuntur nesciunt maiores. Voluptate quod earum corporis doloribus adipisci quibusdam consequuntur maxime sed voluptatem, sint doloremque, perferendis earum, non officiis ratione adipisci ratione!</p>

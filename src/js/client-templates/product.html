@@ -1,7 +1,10 @@
-<img src="" alt="">
+<img src="{% src %}" class="products__product-img" alt="{{name}}" />
 <div class="products__product-content">
   <h4>{{name}}</h4>
   <p>{{description}}</p>
-  <span>{{price}}</span>
-  <button data-js-update="add">{% if added %}Added{% else %}Add to Cart{% endif %}</button>
 </div>
+<div class="products__product-cta">
+  <button data-js-update="add">{% if added %}Remove{% else %}Add to Cart{% endif %}</button>
+  <span>{{price}}</span>
+</div>
+

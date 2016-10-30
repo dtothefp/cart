@@ -1,4 +1,5 @@
 import currency from '../utils/currency-to-number';
+import Src from './tags/Src';
 
 /**
  * Funny, have to use `module.exports` here because the nunjucks-loader
@@ -19,4 +20,6 @@ module.exports = function(env) {
   Object.keys(filters).forEach(name => {
     env.addFilter(name, filters[name]);
   });
+
+  env.addExtension('src', new Src());
 };

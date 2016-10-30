@@ -1,6 +1,6 @@
 <img src="" alt="">
 <h6>{{name}}</h6>
-<button data-js-quantity="increment">+</button>
+<div class="cart__items-button increment" data-js-quantity="increment"></div>
 <span data-js-update="quantity">{{quantity}}</span>
-<button data-js-quantity="decrement">-</button>
+<div class="cart__items-button {% if quantity == 1%}remove{% else %}decrement{% endif %}" data-js-quantity="decrement"></div>
 <span>&#36;<span data-js-update="price">{{price or basePrice}}</span></span>

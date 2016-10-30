@@ -14,8 +14,8 @@ export default class CartItem {
     this.elm.classList.add('cart__items-item');
     this.elm.innerHTML = temp.render(this.state);
     this.id = id;
-    this.addListeners();
     this.addObservers();
+    this.addListeners();
   }
 
   addListeners() {
@@ -24,6 +24,12 @@ export default class CartItem {
     const quantityElms = [...this.elm.querySelectorAll('[data-js-quantity]')];
 
     quantityElms.forEach(elm => {
+      const {jsQuantity} = elm.dataset;
+
+      if (jsQuantity === 'decrement') {
+        this.observers[jsQuantity] = elm;
+      }
+
       elm.addEventListener('click', this.handleClick.bind(this));
     });
   }
@@ -60,6 +66,16 @@ export default class CartItem {
 
       this.observers.quantity.textContent = this.state.quantity;
       this.observers.price.textContent = this.state.price;
+
+      const {decrement} = this.observers;
+
+      if (quantity === 1) {
+        decrement.classList.add('remove');
+        decrement.classList.remove('decrement');
+      } else if (this.lastState.quantity === 1) {
+        decrement.classList.add('decrement');
+        decrement.classList.remove('remove');
+      }
     }
   }
 }

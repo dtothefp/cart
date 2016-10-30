@@ -46,7 +46,7 @@ export default class Product {
     const {added} = this.state;
 
     if (isInCart && !added) {
-      this.observers.add.textContent = 'Added';
+      this.observers.add.textContent = 'Remove';
       this.state.added = true;
     } else if (!isInCart && added) {
       this.observers.add.textContent = 'Add to Cart';

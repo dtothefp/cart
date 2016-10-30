@@ -1,5 +1,9 @@
 import path from 'path';
 
+const includePaths = [
+  require.resolve('normalize-scss')
+].map(path.dirname.bind(path));
+
 export default {
   assemble: {
     data: {},
@@ -13,7 +17,7 @@ export default {
   },
   webpack: {
     shouldRev: true,
-    includePaths: [],
+    includePaths,
     integrity: 'sha256',
     expose: {},
     alias: {

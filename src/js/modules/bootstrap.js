@@ -20,6 +20,11 @@ export default function() {
     middleware.push(createLogger());
   }
 
+  // https://github.com/zalmoxisus/redux-devtools-extension
+  // if (global.devToolsExtension) {
+    // middleware.push(global.devToolsExtension());
+  // }
+
   const reducer = combineReducers({cart, products});
   const middlewareWrapper = applyMiddleware(...middleware);
   const composed = compose(middlewareWrapper);

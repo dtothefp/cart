@@ -44,7 +44,7 @@ describe('#Product', () => {
 
     comp.update(true);
 
-    expect(comp.observers.add).to.have.text('Added');
+    expect(comp.observers.add).to.have.text('Remove');
   });
 
   it('should remove a product', () => {

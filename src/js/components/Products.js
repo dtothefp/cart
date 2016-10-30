@@ -47,7 +47,8 @@ export default class Products {
       const keys = Object.keys(state.products);
 
       keys.forEach(id => {
-        const currState = state.cart[id];
+        const {items = {}} = state.cart;
+        const currState = items[id];
         const child = this.children[id];
 
         child.update(!!currState);
