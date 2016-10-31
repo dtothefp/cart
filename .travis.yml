@@ -22,9 +22,10 @@ notifications:
     on_failure: always
 before_install:
 - npm i -g npm@latest
+- npm i -g yarn
 - npm config set progress=false
 install:
-- npm i
+- yarn
 script:
 - npm run deploy
 after_script:
