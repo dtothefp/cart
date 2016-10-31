@@ -3,14 +3,23 @@ import merge from 'lodash/merge';
 import omit from 'lodash/omit';
 import isBoolean from 'lodash/isBoolean';
 import isNumber from 'lodash/isNumber';
+import {CART} from '../contstants';
+
+const {
+  INIT_CART,
+  TOGGLE_CART,
+  ADD_CART,
+  REMOVE_CART,
+  INCREMENT_CART,
+  DECREMENT_CART
+} = CART;
 
 export default function(state = {}, action) {
-  const {id, total} = action;
-  const currState = state.items && state.items[id];
-  let nextState, quantity, items;
+  const {id, total, quantity} = action;
+  let nextState, items;
 
   switch (action.type) {
-    case 'INIT_CART':
+    case INIT_CART:
       const initalState = Object.assign({
         open: false,
         items: {}
@@ -22,37 +31,25 @@ export default function(state = {}, action) {
         return acc;
       }, initalState);
       break;
-    case 'TOGGLE_CART':
+    case TOGGLE_CART:
       nextState = Object.assign({}, state, {
         open: isBoolean(action.open) ? action.open : !state.open
       });
       break;
-    case 'ADD_CART':
-      if (currState) {
-        quantity = currState.quantity ? currState.quantity + 1 : 1;
-      } else {
-        quantity = 1;
+    case ADD_CART:
+    case REMOVE_CART:
+    case INCREMENT_CART:
+    case DECREMENT_CART:
+      if (quantity === 0 && id) {
+        items = omit(state.items, id);
+        nextState = Object.assign({}, state, {items});
+      } else if (isNumber(quantity)) {
+        items = {
+          [id]: {quantity}
+        };
+        nextState = merge({}, state, {items});
       }
       break;
-    case 'REMOVE_CART':
-      quantity = 0;
-      break;
-    case 'INCREMENT_CART':
-      quantity = currState.quantity + 1;
-      break;
-    case 'DECREMENT_CART':
-      quantity = currState.quantity - 1;
-      break;
-  }
-
-  if (quantity) {
-    items = {
-      [id]: {quantity}
-    };
-    nextState = merge({}, state, {items});
-  } else if (quantity === 0 && id) {
-    items = omit(state.items, id);
-    nextState = Object.assign({}, state, {items});
   }
 
   if (isNumber(total)) {
@@ -61,9 +58,9 @@ export default function(state = {}, action) {
 
   if (nextState && nextState.items) {
     const count = Object.keys(nextState.items).reduce((c, id) => {
-      const {quantity} = nextState.items[id];
+      const {quantity: q} = nextState.items[id];
 
-      return c + quantity;
+      return c + q;
     }, 0);
 
     Object.assign(nextState, {count});

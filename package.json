@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "dom4": "1.8.3",
+    "key-mirror": "1.0.1",
     "lodash": "4.16.4",
     "normalize-scss": "6.0.0",
     "nunjucks-loader": "2.4.4",

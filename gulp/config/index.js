@@ -1,4 +1,5 @@
 import path from 'path';
+import merge from 'lodash/merge';
 
 const includePaths = [
   require.resolve('normalize-scss')
@@ -36,6 +37,21 @@ export default {
       }
     ],
     hot: true,
+    plugins(config, p) {
+      const envConfig = {
+        'process.env': {
+          API: JSON.stringify('http://localhost:3000')
+        }
+      };
+
+      return p.reduce((list, inst) => {
+        if (inst.constructor.name === 'DefinePlugin') {
+          merge(inst.definitions, envConfig);
+        }
+
+        return [...list, inst];
+      }, []);
+    },
     loaders(config, l) {
       const {loaders} = l;
       const nunjucksLoader = {

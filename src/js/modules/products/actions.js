@@ -1,10 +1,14 @@
+import {PRODUCTS} from '../contstants';
+import request from '../../utils/ajax';
+
+const {INIT_PRODUCTS} = PRODUCTS;
+
 export function init() {
   return dispatch => {
-    return fetch('http://localhost:3000/products')
-      .then(data => data.json())
+    return request('products')
       .then(data => {
         dispatch({
-          type: 'INIT_PRODUCTS',
+          type: INIT_PRODUCTS,
           value: data
         });
 

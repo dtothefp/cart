@@ -118,7 +118,7 @@ export default class Cart {
         } else if (currState && !child) {
           frag = frag || document.createDocumentFragment();
           // add a new child
-          child = this.children[id] = new CartItem(this.actions, {
+          child = new CartItem(this.actions, {
             id,
             state: {
               quantity: 1,
