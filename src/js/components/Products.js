@@ -1,3 +1,4 @@
+import isEmpty from 'lodash/isEmpty';
 import Product from './Product';
 import template from '../client-templates/products.html';
 
@@ -36,11 +37,13 @@ export default class Products {
 
   addProducts(products = {}) {
     return Object.keys(products).reduce((frag, id) => {
+      const {items = {}} = this.state.cart || {};
+      const added = !isEmpty(items[id]);
       const child = new Product(this.actions, {
         id,
         state: {
           ...products[id],
-          added: !!this.state.cart[id]
+          added
         }
       });
 

@@ -4,3 +4,4 @@ dist
 *.log
 deploy_key*
 !deploy_key.enc
+.eslintrc

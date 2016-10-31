@@ -8,9 +8,6 @@ export default function(gulp, plugins, config) {
   const dbPath = addbase('data', 'db.json');
   const read = promisify(readJson);
   const write = promisify(outputJson);
-  const server = jsonServer.create();
-  const router = jsonServer.router(dbPath);
-  const middlewares = jsonServer.defaults();
 
   return () => {
     return read(dbPath)
@@ -20,6 +17,9 @@ export default function(gulp, plugins, config) {
         return write(dbPath, json);
       })
       .then(() => {
+        const server = jsonServer.create();
+        const router = jsonServer.router(dbPath);
+        const middlewares = jsonServer.defaults();
         const listen = promisify(server.listen, {ctx: server});
         server.use(middlewares);
         server.use(router);
