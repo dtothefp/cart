@@ -33,7 +33,7 @@ export default class Cart {
     this.addListeners();
 
     if (this.isOpen()) {
-      this.elm.classList.add('open');
+      this.elm.classList.add('is-open');
     }
 
     return this.elm;
@@ -164,9 +164,9 @@ export default class Cart {
     const currIsOpen = this.isOpen();
 
     if (currIsOpen && !lastWasOpen) {
-      this.elm.classList.add('open');
+      this.elm.classList.add('is-open');
     } else if (!currIsOpen && lastWasOpen) {
-      this.elm.classList.remove('open');
+      this.elm.classList.remove('is-open');
     }
   }
 

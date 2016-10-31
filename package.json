@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp build",
+    "serve": "gulp serve",
+    "watch": "gulp watch",
     "deploy": "deploy; test $? -eq 0 -o $? -eq 1 -o $? -eq 2",
     "fix": "eslint --fix ./test/integration/**",
-    "test": "gulp karma"
+    "test": "gulp karma",
+    "test:watch": "gulp test:integration"
   },
   "repository": {
     "type": "git",

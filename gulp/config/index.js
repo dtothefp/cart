@@ -7,8 +7,7 @@ const includePaths = [
 
 export default {
   assemble: {
-    data: {},
-    registerTags(nunj, app) {}
+    minify: true
   },
   browserSync: {
     open: true

@@ -77,7 +77,6 @@ export function update(id, opts = {}) {
     dispatch(action);
 
     if (!global.describe) {
-      // TODO: debounce this
       updateCart(action).catch(err => {
         // TODO: handle error i.e. `dispatch(/* some error action */)
         console.error(err.message, err.stack); // eslint-disable-line
